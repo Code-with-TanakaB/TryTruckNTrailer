@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TryTruckNTrailer - Truck & Trailer Dealership</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Try<span style="color: red;">Truck</span>N<span style="color: red;">Trailer</span></div>
+            <ul class="nav-links">
+                <li><a href="#gallery">Collection</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <section class="hero">
+            <h1>Welcome to TryTruckNTrailer</h1>
+            <p>Your trusted truck & trailer dealership. Explore our collection and find your perfect match!</p>
+            <a href="#gallery" class="cta-btn">Browse Collection</a>
+        </section>
+    </header>
+
+    <main>
+        <section id="image-gallery" class="image-gallery-section">
+            <h2>Showcase Gallery</h2>
+            <div class="image-gallery-grid">
+                <img src="image/truck1.jpg" alt="Truck 1">
+                <img src="image/truck2.jpg" alt="Truck 2">
+                <img src="image/truck3.jpg" alt="Truck 3">
+                <img src="image/truck4.jpg" alt="Truck 4">
+                <img src="image/trailer1.jpg" alt="Trailer 1">
+                <img src="image/trailer2.jpg" alt="Trailer 2">
+                <img src="image/trailer3.jpg" alt="Trailer 3">
+                <img src="image/trailer4.jpg" alt="Trailer 4">
+            </div>
+        </section>
+        <section id="gallery" class="gallery-section">
+            <h2>Our Collection</h2>
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="trucks">Trucks</button>
+                <button class="tab-btn" data-category="trailers">Trailers</button>
+            </div>
+            <div class="gallery-grid" id="product-gallery">
+                <!-- Products will be rendered here by script.js -->
+            </div>
+        </section>
+
+        <section id="product-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div id="modal-product-details">
+                    <!-- Product details will be rendered here by script.js -->
+                </div>
+                <div id="more-like-this">
+                    <!-- More like this will be rendered here by script.js -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About Us</h2>
+            <p>TryTruckNTrailer is a leading dealership specializing in high-quality trucks and trailers. With years of experience, we pride ourselves on our customer service and wide selection of vehicles to suit every need.</p>
+        </section>
+
+        <section id="faqs" class="faqs-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>What types of trucks and trailers do you offer?</h3>
+                    <p>We offer a variety of trucks including semi-trucks, pickup trucks, and box trucks, as well as flatbed, enclosed, and specialty trailers.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you provide financing options?</h3>
+                    <p>Yes, we offer flexible financing options to help you get the vehicle you need.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I schedule a test drive?</h3>
+                    <p>Absolutely! Contact us to schedule a test drive for any vehicle in our collection.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="reviews-section">
+            <h2>Customer Reviews</h2>
+            <div class="review-list">
+                <div class="review-item">
+                    <p>"Great selection and friendly staff! Highly recommend TryTruckNTrailer."</p>
+                    <span>- Alex P.</span>
+                </div>
+                <div class="review-item">
+                    <p>"Smooth buying process and excellent after-sales support."</p>
+                    <span>- Jamie L.</span>
+                </div>
+                <div class="review-item">
+                    <p>"Found the perfect trailer for my business. Thank you!"</p>
+                    <span>- Morgan S.</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p>Email: info@trytruckntrailer.com</p>
+                <p>Phone: (555) 123-4567</p>
+                <p>Location: 123 Truck Lane, Trailer City</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TryTruckNTrailer. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
