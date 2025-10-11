@@ -59,9 +59,10 @@ let currentCategory = 'trucks';
 
 function renderGallery(category) {
     gallery.innerHTML = '';
-    products[category].forEach(product => {
+    products[category].forEach((product, i) => {
         const card = document.createElement('div');
-        card.className = 'product-card';
+        card.className = 'product-card scroll-reveal';
+        card.style.transitionDelay = (i * 0.12) + 's';
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
@@ -70,6 +71,7 @@ function renderGallery(category) {
         `;
         gallery.appendChild(card);
     });
+    revealOnScroll();
 }
 
 function showModal(product, category) {
@@ -84,9 +86,10 @@ function showModal(product, category) {
     if (more.length) {
         moreLikeThis.innerHTML = '<h4>More Like This</h4><div class="more-like-list"></div>';
         const list = moreLikeThis.querySelector('.more-like-list');
-        more.forEach(p => {
+        more.forEach((p, i) => {
             const card = document.createElement('div');
-            card.className = 'more-like-card';
+            card.className = 'more-like-card scroll-reveal';
+            card.style.transitionDelay = (i * 0.12) + 's';
             card.innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100px;height:60px;border-radius:6px;"><div>${p.name}</div>`;
             card.onclick = () => showModal(p, category);
             list.appendChild(card);
@@ -95,7 +98,23 @@ function showModal(product, category) {
         moreLikeThis.innerHTML = '';
     }
     modal.classList.remove('hidden');
+    setTimeout(revealOnScroll, 100); // Animate modal items
 }
+// Scroll reveal logic
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.scroll-reveal');
+    const windowWidth = window.innerWidth;
+    for (const el of reveals) {
+        const rect = el.getBoundingClientRect();
+        if (rect.left < windowWidth - 60) {
+            el.classList.add('visible');
+        } else {
+            el.classList.remove('visible');
+        }
+    }
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('resize', revealOnScroll);
 
 // Tab switching
 for (const tab of tabs) {

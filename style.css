@@ -1,3 +1,78 @@
+.product-card {
+    /* ...existing styles... */
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.product-card:hover {
+    box-shadow: 0 8px 24px rgba(255,152,0,0.18);
+    transform: translateY(-8px) scale(1.03);
+    border: 2px solid #ff9800;
+}
+.product-card img {
+    transition: transform 0.3s;
+}
+.product-card:hover img {
+    transform: scale(1.08) rotate(-2deg);
+}
+.product-card h3, .product-card p {
+    transition: color 0.2s;
+}
+.product-card:hover h3 {
+    color: #ff9800;
+}
+.product-card:hover p {
+    color: #222;
+}
+.view-btn {
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    margin-top: 0.7rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,152,0,0.09);
+}
+.view-btn:hover {
+    background: #e67c00;
+    box-shadow: 0 4px 16px rgba(255,152,0,0.18);
+}
+.modal-content {
+    /* ...existing styles... */
+    box-shadow: 0 8px 32px rgba(255,152,0,0.13);
+    animation: fadeInModal 0.7s;
+}
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.scroll-reveal {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.7s cubic-bezier(.77,0,.18,1);
+}
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* Hero section background image */
+.hero-bg {
+    background: linear-gradient(rgba(26,41,48,0.55), rgba(26,41,48,0.55)), url('image/truck3.jpg') center/cover no-repeat;
+    color: #fff;
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero-bg h1, .hero-bg p, .hero-bg .cta-btn {
+    position: relative;
+    z-index: 2;
+}
 /* Image gallery section styles */
 .image-gallery-section {
     background: #fff;
@@ -33,7 +108,7 @@
 /* Responsive styles for TryTruckNTrailer landing page */
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Raleway', Arial, sans-serif;
     background: #f7f7f7;
     color: #222;
 }
@@ -80,7 +155,7 @@ header {
     display: inline-block;
     margin-top: 1.5rem;
     padding: 0.8rem 2rem;
-    background: #ff9800;
+    background: red;
     color: #fff;
     border: none;
     border-radius: 25px;
