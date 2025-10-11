@@ -1,3 +1,26 @@
+/* Logo icon */
+.fa-solid fa-truck-moving {
+    color: red;
+}
+/* Product details styles */
+.product-details {
+    margin: 0.7rem 0 0.7rem 0;
+    font-size: 0.98rem;
+    color: #444;
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 0.5rem 0.7rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.product-details-modal {
+    margin: 1rem 0 1rem 0;
+    font-size: 1.05rem;
+    color: #333;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
 /* Navbar search styles */
 .nav-search {
     display: flex;

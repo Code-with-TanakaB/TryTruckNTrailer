@@ -119,21 +119,33 @@ const products = {
             name: 'Freightliner Cascadia',
             image: 'image/truck1.jpg',
             description: '2022 Freightliner Cascadia, 450HP, Automatic, 120,000 miles.',
-            details: 'Full service history, warranty included, ready for long hauls.'
+            details: 'Full service history, warranty included, ready for long hauls.',
+            price: 'R1,250,000',
+            year: 2022,
+            model: 'Cascadia',
+            make: 'Freightliner'
         },
         {
             id: 't2',
             name: 'Kenworth T680',
             image: 'image/truck2.jpg',
             description: '2021 Kenworth T680, 400HP, Manual, 98,000 miles.',
-            details: 'Fuel efficient, comfortable sleeper cab, financing available.'
+            details: 'Fuel efficient, comfortable sleeper cab, financing available.',
+            price: 'R1,100,000',
+            year: 2021,
+            model: 'T680',
+            make: 'Kenworth'
         },
         {
             id: 't3',
             name: 'Volvo VNL 760',
             image: 'image/truck3.jpg',
             description: '2020 Volvo VNL 760, 425HP, Automatic, 150,000 miles.',
-            details: 'Advanced safety features, spacious interior, one owner.'
+            details: 'Advanced safety features, spacious interior, one owner.',
+            price: 'R1,050,000',
+            year: 2020,
+            model: 'VNL 760',
+            make: 'Volvo'
         }
     ],
     trailers: [
@@ -142,21 +154,33 @@ const products = {
             name: 'Utility 53ft Dry Van',
             image: 'image/trailer1.jpg',
             description: '2022 Utility 53ft Dry Van, swing doors, aluminum roof.',
-            details: 'Lightweight, durable, DOT inspected, ready for work.'
+            details: 'Lightweight, durable, DOT inspected, ready for work.',
+            price: 'R450,000',
+            year: 2022,
+            model: '53ft Dry Van',
+            make: 'Utility'
         },
         {
             id: 'tr2',
             name: 'Fontaine Flatbed',
             image: 'image/trailer2.jpg',
             description: '2021 Fontaine Flatbed, 48ft, steel frame.',
-            details: 'Versatile, easy loading, excellent condition.'
+            details: 'Versatile, easy loading, excellent condition.',
+            price: 'R390,000',
+            year: 2021,
+            model: 'Flatbed',
+            make: 'Fontaine'
         },
         {
             id: 'tr3',
             name: 'Great Dane Reefer',
             image: 'image/trailer3.jpg',
             description: '2020 Great Dane Reefer, 53ft, Thermo King unit.',
-            details: 'Temperature controlled, low hours, perfect for perishables.'
+            details: 'Temperature controlled, low hours, perfect for perishables.',
+            price: 'R520,000',
+            year: 2020,
+            model: 'Reefer',
+            make: 'Great Dane'
         }
     ]
 };
@@ -180,6 +204,12 @@ function renderGallery(category) {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.description}</p>
+            <div class="product-details">
+                <span><strong>Price:</strong> ${product.price}</span><br>
+                <span><strong>Year:</strong> ${product.year}</span><br>
+                <span><strong>Model:</strong> ${product.model}</span><br>
+                <span><strong>Make:</strong> ${product.make}</span>
+            </div>
             <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
         `;
         gallery.appendChild(card);
@@ -192,6 +222,12 @@ function showModal(product, category) {
         <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
+        <div class="product-details-modal">
+            <span><strong>Price:</strong> ${product.price}</span><br>
+            <span><strong>Year:</strong> ${product.year}</span><br>
+            <span><strong>Model:</strong> ${product.model}</span><br>
+            <span><strong>Make:</strong> ${product.make}</span><br>
+        </div>
         <p><strong>Details:</strong> ${product.details}</p>
     `;
     // More like this
@@ -257,8 +293,10 @@ modal.onclick = function(e) {
     if (e.target === modal) modal.classList.add('hidden');
 };
 
-// Initial render
-renderGallery(currentCategory);
+// Initial render after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    renderGallery(currentCategory);
+});
 
 // Contact form (demo only)
 document.getElementById('contact-form').onsubmit = function(e) {
