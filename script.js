@@ -1,3 +1,116 @@
+const resultsSection = document.getElementById('results');
+const resultsGrid = document.getElementById('search-results-grid');
+function showResults(filtered, category) {
+    // Hide main gallery, show results section
+    document.getElementById('gallery').style.display = 'none';
+    resultsSection.style.display = 'block';
+    resultsGrid.innerHTML = '';
+    filtered.forEach((product, i) => {
+        const card = document.createElement('div');
+        card.className = 'product-card scroll-reveal';
+        card.style.transitionDelay = (i * 0.12) + 's';
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
+        `;
+        resultsGrid.appendChild(card);
+    });
+    revealOnScroll();
+    // Scroll to results
+    resultsSection.scrollIntoView({ behavior: 'smooth' });
+}
+// Search logic
+function filterProducts(query, category) {
+    query = query.trim().toLowerCase();
+    if (!query) return products[category];
+    return products[category].filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query) ||
+        p.details.toLowerCase().includes(query)
+    );
+}
+
+function renderFilteredGallery(filtered, category) {
+    gallery.innerHTML = '';
+    filtered.forEach((product, i) => {
+        const card = document.createElement('div');
+        card.className = 'product-card scroll-reveal';
+        card.style.transitionDelay = (i * 0.12) + 's';
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
+        `;
+        gallery.appendChild(card);
+    });
+    revealOnScroll();
+}
+
+document.getElementById('nav-search-form').onsubmit = function(e) {
+    e.preventDefault();
+    const query = document.getElementById('nav-search-input').value;
+    const filtered = filterProducts(query, currentCategory);
+    showResults(filtered, currentCategory);
+};
+
+document.getElementById('mobile-search-form').onsubmit = function(e) {
+    e.preventDefault();
+    const query = document.getElementById('mobile-search-input').value;
+    const filtered = filterProducts(query, currentCategory);
+    showResults(filtered, currentCategory);
+    // Optionally close menu after search
+    mobileMenu.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.querySelectorAll('.bar')[0].style.transform = '';
+    menuToggle.querySelectorAll('.bar')[1].style.opacity = '1';
+    menuToggle.querySelectorAll('.bar')[2].style.transform = '';
+};
+// Show main gallery if user switches tabs or clears search
+function showGallery() {
+    resultsSection.style.display = 'none';
+    document.getElementById('gallery').style.display = 'block';
+    renderGallery(currentCategory);
+}
+for (const tab of tabs) {
+    tab.onclick = function() {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentCategory = tab.getAttribute('data-category');
+        showGallery();
+    };
+}
+// Toggle menu logic
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+menuToggle.addEventListener('click', function() {
+    mobileMenu.classList.toggle('open');
+    menuToggle.classList.toggle('open');
+});
+// Animate hamburger icon
+menuToggle.addEventListener('click', function() {
+    if (menuToggle.classList.contains('open')) {
+        menuToggle.querySelectorAll('.bar')[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+        menuToggle.querySelectorAll('.bar')[1].style.opacity = '0';
+        menuToggle.querySelectorAll('.bar')[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+    } else {
+        menuToggle.querySelectorAll('.bar')[0].style.transform = '';
+        menuToggle.querySelectorAll('.bar')[1].style.opacity = '1';
+        menuToggle.querySelectorAll('.bar')[2].style.transform = '';
+    }
+});
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.querySelectorAll('.bar')[0].style.transform = '';
+        menuToggle.querySelectorAll('.bar')[1].style.opacity = '1';
+        menuToggle.querySelectorAll('.bar')[2].style.transform = '';
+    });
+});
 // Demo data for trucks and trailers
 const products = {
     trucks: [
