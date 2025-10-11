@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TryTruckNTrailer | Truck & Trailer Dealership</title>
+    <title>TryTruckNTrailer - Truck & Trailer Dealership</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo"><i class="fa-solid fa-truck-moving"></i>Try<span style="color: red;">Truck</span>N<span style="color: red;">Trailer</span></div>
-            <form class="nav-search" id="nav-search-form" autocomplete="off">
-                <input type="text" id="nav-search-input" placeholder="Search trucks or trailers...">
-                <button type="submit" aria-label="Search"><span>&#128269;</span></button>
+            <div class="logo"><i class="fa-solid fa-truck-moving" style="color: red; margin-right: 7px;"></i> Try<span style="color: red;">Truck</span>N<span style="color: red;">Trailer</span></div>
+            <form class="nav-search" onsubmit="return false;">
+                <input type="text" id="nav-search-input" placeholder="Search products..." autocomplete="off">
+                <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             <button class="menu-toggle" aria-label="Open menu">
                 <span class="bar"></span>
@@ -29,10 +29,6 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="mobile-menu">
-                <form class="mobile-search" id="mobile-search-form" autocomplete="off">
-                    <input type="text" id="mobile-search-input" placeholder="Search trucks or trailers...">
-                    <button type="submit" aria-label="Search"><span>&#128269;</span></button>
-                </form>
                 <ul>
                     <li><a href="#gallery">Collection</a></li>
                     <li><a href="#about">About</a></li>
@@ -40,11 +36,15 @@
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <form class="nav-search mobile-search" onsubmit="return false;">
+                    <input type="text" id="mobile-search-input" placeholder="Search products..." autocomplete="off">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
         </nav>
     <section class="hero hero-bg">
             <h1>Quality Pre-Owned Trucks & Trailers</h1>
-            <p>Find the vehicle that meets your business needs at competitive prices.</p>
+            <p>Find the perfect vehicle for your business needs at competitive prices</p>
             <a href="#gallery" class="cta-btn">Get Quote</a>
         </section>
     </header>
@@ -58,21 +58,23 @@
                 <button class="tab-btn" data-category="trailers">Trailers</button>
             </div>
             <div class="gallery-grid" id="product-gallery">
-                
                 <!-- Products will be rendered here by script.js -->
             </div>
         </section>
         <section id="image-gallery" class="image-gallery-section">
             <h2>Our Inventory</h2>
-            <div class="image-gallery-grid">
-                <img src="image/truck1.jpg" alt="Truck 1">
-                <img src="image/truck2.jpg" alt="Truck 2">
-                <img src="image/truck3.jpg" alt="Truck 3">
-                <img src="image/truck4.jpg" alt="Truck 4">
-                <img src="image/trailer1.jpg" alt="Trailer 1">
-                <img src="image/trailer2.jpg" alt="Trailer 2">
-                <img src="image/trailer3.jpg" alt="Trailer 3">
-                <img src="image/trailer4.jpg" alt="Trailer 4">
+            <div class="slideshow-container">
+                <button class="slideshow-btn prev" aria-label="Previous">&#10094;</button>
+                <div class="slideshow-images">
+                    <!-- Images will be rendered by script.js -->
+                </div>
+                <div class="slideshow-caption">
+                    <!-- Caption will be rendered by script.js -->
+                </div>
+                <button class="slideshow-btn next" aria-label="Next">&#10095;</button>
+            </div>
+            <div class="slideshow-dots">
+                <!-- Dots will be rendered by script.js -->
             </div>
         </section>
 
@@ -89,66 +91,122 @@
         </section>
 
         <section id="about" class="about-section">
-            <h2>About Us</h2>
-            <p>At TryTruckNTrailer, we've been providing quality pre-owned trucks and trailers to businesses and individuals across the nation for over 5 years. Our commitment to quality and customer satisfaction has made us a trusted name in the industry. 
-                We understand that purchasing a commercial vehicle is a significant investment for your business. That's why we thoroughly inspect and service each vehicle before it enters our inventory, ensuring you get a reliable truck or trailer that will serve your business for years to come.</p>
+            <h2>About TryTruckNTrailer</h2>
+            <p>At TryTruckNTrailer, we've been providing quality pre-owned trucks and trailers to businesses and individuals across the nation for over 5 years. Our commitment to quality and customer satisfaction has made us a trusted name in the industry.</p>
+            <p>We understand that purchasing a commercial vehicle is a significant investment for your business. That's why we thoroughly inspect and service each vehicle before it enters our inventory, ensuring you get a reliable truck or trailer that will serve your business for years to come.</p>
+            <div class="about-why-choose">
+                <h3>Why Choose Us?</h3>
+                <ul>
+                    <li><i class="fa fa-check-circle"></i> Quality Pre-Owned Inventory</li>
+                    <li><i class="fa fa-check-circle"></i> Expert Vehicle Inspections</li>
+                    <li><i class="fa fa-check-circle"></i> Competitive Pricing</li>
+                    <li><i class="fa fa-check-circle"></i> Friendly, Knowledgeable Staff</li>
+                    <li><i class="fa fa-check-circle"></i> Nationwide Delivery</li>
+                </ul>
+            </div>
         </section>
 
         <section id="faqs" class="faqs-section">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-list">
                 <div class="faq-item">
-                    <h3>What types of trucks and trailers do you offer?</h3>
-                    <p>We offer a variety of trucks including semi-trucks, pickup trucks, and box trucks, as well as flatbed, enclosed, and specialty trailers.</p>
+                    <button class="faq-question">What types of trucks and trailers do you offer?<span class="arrow">&#9662;</span></button>
+                    <div class="faq-answer">
+                        <p>We offer a variety of trucks including semi-trucks, pickup trucks, and box trucks, as well as flatbed, enclosed, and specialty trailers.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <h3>Do you provide financing options?</h3>
-                    <p>Yes, we offer flexible financing options to help you get the vehicle you need.</p>
+                    <button class="faq-question">Do you provide financing options?<span class="arrow">&#9662;</span></button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer flexible financing options to help you get the vehicle you need.</p>
+                    </div>
                 </div>
                 <div class="faq-item">
-                    <h3>Can I schedule a test drive?</h3>
-                    <p>Absolutely! Contact us to schedule a test drive for any vehicle in our collection.</p>
+                    <button class="faq-question">Can I schedule a test drive?<span class="arrow">&#9662;</span></button>
+                    <div class="faq-answer">
+                        <p>Absolutely! Contact us to schedule a test drive for any vehicle in our collection.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="reviews" class="reviews-section">
             <h2>Customer Reviews</h2>
-            <div class="review-list">
-                <div class="review-item">
-                    <p>"Great selection and friendly staff! Highly recommend TryTruckNTrailer."</p>
-                    <span>- Alex P.</span>
+            <div class="review-slideshow-container">
+                <button class="review-slideshow-btn prev" aria-label="Previous">&#10094;</button>
+                <div class="review-slideshow-cards">
+                    <!-- Review cards will be rendered by script.js -->
                 </div>
-                <div class="review-item">
-                    <p>"Smooth buying process and excellent after-sales support."</p>
-                    <span>- Jamie L.</span>
-                </div>
-                <div class="review-item">
-                    <p>"Found the perfect trailer for my business. Thank you!"</p>
-                    <span>- Morgan S.</span>
-                </div>
+                <button class="review-slideshow-btn next" aria-label="Next">&#10095;</button>
+            </div>
+            <div class="review-slideshow-dots">
+                <!-- Review dots will be rendered by script.js -->
             </div>
         </section>
 
         <section id="contact" class="contact-section">
             <h2>Contact Us</h2>
-            <form id="contact-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
+            <form id="contact-form" class="modern-contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name"><i class="fa fa-user"></i> Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message"><i class="fa fa-comment"></i> Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="contact-btn"><i class="fa fa-paper-plane"></i> Send Message</button>
             </form>
-            <div class="contact-info">
-                <p>Email: info@trytruckntrailer.com</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Location: 123 Truck Lane, Trailer City</p>
+            <div class="contact-info modern-contact-info">
+                <div class="info-item"><i class="fa fa-envelope"></i> info@trytruckntrailer.com</div>
+                <div class="info-item"><i class="fa fa-phone"></i> (555) 123-4567</div>
+                <div class="info-item"><i class="fa fa-map-marker-alt"></i> 123 Truck Lane, Trailer City</div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 TryTruckNTrailer. All rights reserved.</p>
+    <footer class="modern-footer">
+        <div class="footer-content">
+            <div class="footer-section newsletter">
+                <h3>Subscribe to Our Newsletter</h3>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit"><i class="fa fa-paper-plane"></i> Subscribe</button>
+                </form>
+                <p class="newsletter-desc">Get the latest inventory updates, deals, and tips delivered to your inbox.</p>
+            </div>
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#gallery">Collection</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section why-choose">
+                <h3>Why Choose Us?</h3>
+                <ul>
+                    <li><i class="fa fa-check-circle"></i> Quality Pre-Owned Inventory</li>
+                    <li><i class="fa fa-check-circle"></i> Expert Vehicle Inspections</li>
+                    <li><i class="fa fa-check-circle"></i> Competitive Pricing</li>
+                    <li><i class="fa fa-check-circle"></i> Friendly, Knowledgeable Staff</li>
+                    <li><i class="fa fa-check-circle"></i> Nationwide Delivery</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TryTruckNTrailer. All rights reserved.</p>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

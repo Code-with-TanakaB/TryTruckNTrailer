@@ -1,87 +1,159 @@
-const resultsSection = document.getElementById('results');
-const resultsGrid = document.getElementById('search-results-grid');
-function showResults(filtered, category) {
-    // Hide main gallery, show results section
-    document.getElementById('gallery').style.display = 'none';
-    resultsSection.style.display = 'block';
-    resultsGrid.innerHTML = '';
-    filtered.forEach((product, i) => {
-        const card = document.createElement('div');
-        card.className = 'product-card scroll-reveal';
-        card.style.transitionDelay = (i * 0.12) + 's';
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
-        `;
-        resultsGrid.appendChild(card);
-    });
-    revealOnScroll();
-    // Scroll to results
-    resultsSection.scrollIntoView({ behavior: 'smooth' });
-}
-// Search logic
-function filterProducts(query, category) {
+// Product search logic
+function searchProducts(query) {
     query = query.trim().toLowerCase();
-    if (!query) return products[category];
-    return products[category].filter(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query) ||
-        p.details.toLowerCase().includes(query)
+    if (!query) {
+        renderGallery(currentCategory);
+        return;
+    }
+    const filtered = products[currentCategory].filter(product =>
+        product.name.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query) ||
+        product.details.toLowerCase().includes(query)
     );
-}
-
-function renderFilteredGallery(filtered, category) {
     gallery.innerHTML = '';
     filtered.forEach((product, i) => {
         const card = document.createElement('div');
-        card.className = 'product-card scroll-reveal';
-        card.style.transitionDelay = (i * 0.12) + 's';
+        card.className = `product-card scroll-reveal delay-${(i % 4) + 1}`;
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.description}</p>
-            <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
+            <button class="view-btn" data-id="${product.id}" data-category="${currentCategory}">View Details</button>
         `;
         gallery.appendChild(card);
     });
     revealOnScroll();
 }
-
-document.getElementById('nav-search-form').onsubmit = function(e) {
-    e.preventDefault();
-    const query = document.getElementById('nav-search-input').value;
-    const filtered = filterProducts(query, currentCategory);
-    showResults(filtered, currentCategory);
-};
-
-document.getElementById('mobile-search-form').onsubmit = function(e) {
-    e.preventDefault();
-    const query = document.getElementById('mobile-search-input').value;
-    const filtered = filterProducts(query, currentCategory);
-    showResults(filtered, currentCategory);
-    // Optionally close menu after search
-    mobileMenu.classList.remove('open');
-    menuToggle.classList.remove('open');
-    menuToggle.querySelectorAll('.bar')[0].style.transform = '';
-    menuToggle.querySelectorAll('.bar')[1].style.opacity = '1';
-    menuToggle.querySelectorAll('.bar')[2].style.transform = '';
-};
-// Show main gallery if user switches tabs or clears search
-function showGallery() {
-    resultsSection.style.display = 'none';
-    document.getElementById('gallery').style.display = 'block';
-    renderGallery(currentCategory);
+document.getElementById('nav-search-input').addEventListener('input', function(e) {
+    searchProducts(e.target.value);
+});
+document.getElementById('mobile-search-input').addEventListener('input', function(e) {
+    searchProducts(e.target.value);
+});
+// Review card slideshow logic
+const reviews = [
+    {
+        text: 'Great selection and friendly staff! Highly recommend TryTruckNTrailer.',
+        reviewer: 'Alex P.',
+        rating: 5
+    },
+    {
+        text: 'Smooth buying process and excellent after-sales support.',
+        reviewer: 'Jamie L.',
+        rating: 4
+    },
+    {
+        text: 'Found the perfect trailer for my business. Thank you!',
+        reviewer: 'Morgan S.',
+        rating: 5
+    }
+];
+let reviewIndex = 0;
+const reviewCardsContainer = document.querySelector('.review-slideshow-cards');
+const reviewDotsContainer = document.querySelector('.review-slideshow-dots');
+function renderReviewSlideshow() {
+    reviewCardsContainer.innerHTML = '';
+    reviews.forEach((review, i) => {
+        const card = document.createElement('div');
+        card.className = 'review-card' + (i === reviewIndex ? ' active' : '');
+        // Star ratings
+        let stars = '';
+        for (let s = 1; s <= 5; s++) {
+            stars += `<i class="fa${s <= review.rating ? 's' : 'r'} fa-star"></i>`;
+        }
+        card.innerHTML = `
+            <div class="stars">${stars}</div>
+            <p>"${review.text}"</p>
+            <div class="reviewer">- ${review.reviewer}</div>
+        `;
+        reviewCardsContainer.appendChild(card);
+    });
+    // Dots
+    reviewDotsContainer.innerHTML = '';
+    reviews.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'review-slideshow-dot' + (i === reviewIndex ? ' active' : '');
+        dot.onclick = () => { reviewIndex = i; renderReviewSlideshow(); };
+        reviewDotsContainer.appendChild(dot);
+    });
 }
-for (const tab of tabs) {
-    tab.onclick = function() {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentCategory = tab.getAttribute('data-category');
-        showGallery();
-    };
+function nextReview() {
+    reviewIndex = (reviewIndex + 1) % reviews.length;
+    renderReviewSlideshow();
 }
+function prevReview() {
+    reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
+    renderReviewSlideshow();
+}
+document.querySelector('.review-slideshow-btn.next').onclick = nextReview;
+document.querySelector('.review-slideshow-btn.prev').onclick = prevReview;
+renderReviewSlideshow();
+let reviewSlideshowTimer = setInterval(nextReview, 5000);
+reviewCardsContainer.addEventListener('mouseenter', () => clearInterval(reviewSlideshowTimer));
+reviewCardsContainer.addEventListener('mouseleave', () => reviewSlideshowTimer = setInterval(nextReview, 5000));
+// Slideshow logic
+const slideshowImages = [
+    { src: 'image/truck1.jpg', alt: 'Truck 1', desc: 'Freightliner Cascadia: Reliable, powerful, and ready for long hauls.' },
+    { src: 'image/truck2.jpg', alt: 'Truck 2', desc: 'Kenworth T680: Fuel efficient, comfortable sleeper cab.' },
+    { src: 'image/truck3.jpg', alt: 'Truck 3', desc: 'Volvo VNL 760: Advanced safety, spacious interior.' },
+    { src: 'image/truck4.jpg', alt: 'Truck 4', desc: 'Premium Truck: High performance, modern features.' },
+    { src: 'image/trailer1.jpg', alt: 'Trailer 1', desc: 'Utility 53ft Dry Van: Lightweight, durable, DOT inspected.' },
+    { src: 'image/trailer2.jpg', alt: 'Trailer 2', desc: 'Fontaine Flatbed: Versatile, easy loading, excellent condition.' },
+    { src: 'image/trailer3.jpg', alt: 'Trailer 3', desc: 'Great Dane Reefer: Temperature controlled, low hours.' },
+    { src: 'image/trailer4.jpg', alt: 'Trailer 4', desc: 'Premium Trailer: Robust build, ready for business.' }
+];
+let slideshowIndex = 0;
+const slideshowContainer = document.querySelector('.slideshow-images');
+const slideshowDots = document.querySelector('.slideshow-dots');
+function renderSlideshow() {
+    slideshowContainer.innerHTML = '';
+    slideshowImages.forEach((img, i) => {
+        const el = document.createElement('img');
+        el.src = img.src;
+        el.alt = img.alt;
+        el.className = 'slideshow-img' + (i === slideshowIndex ? ' active' : '');
+        slideshowContainer.appendChild(el);
+    });
+    // Caption
+    const captionBox = document.querySelector('.slideshow-caption');
+    if (captionBox) {
+        captionBox.textContent = slideshowImages[slideshowIndex].desc;
+    }
+    // Dots
+    slideshowDots.innerHTML = '';
+    slideshowImages.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'slideshow-dot' + (i === slideshowIndex ? ' active' : '');
+        dot.onclick = () => { slideshowIndex = i; renderSlideshow(); };
+        slideshowDots.appendChild(dot);
+    });
+}
+function nextSlide() {
+    slideshowIndex = (slideshowIndex + 1) % slideshowImages.length;
+    renderSlideshow();
+}
+function prevSlide() {
+    slideshowIndex = (slideshowIndex - 1 + slideshowImages.length) % slideshowImages.length;
+    renderSlideshow();
+}
+document.querySelector('.slideshow-btn.next').onclick = nextSlide;
+document.querySelector('.slideshow-btn.prev').onclick = prevSlide;
+renderSlideshow();
+let slideshowTimer = setInterval(nextSlide, 4000);
+// Pause on hover
+slideshowContainer.addEventListener('mouseenter', () => clearInterval(slideshowTimer));
+slideshowContainer.addEventListener('mouseleave', () => slideshowTimer = setInterval(nextSlide, 4000));
+// FAQ dropdown logic
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const item = btn.parentElement;
+        item.classList.toggle('active');
+        // Close others
+        document.querySelectorAll('.faq-item').forEach(other => {
+            if (other !== item) other.classList.remove('active');
+        });
+    });
+});
 // Toggle menu logic
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
@@ -119,33 +191,21 @@ const products = {
             name: 'Freightliner Cascadia',
             image: 'image/truck1.jpg',
             description: '2022 Freightliner Cascadia, 450HP, Automatic, 120,000 miles.',
-            details: 'Full service history, warranty included, ready for long hauls.',
-            price: 'R1,250,000',
-            year: 2022,
-            model: 'Cascadia',
-            make: 'Freightliner'
+            details: 'Full service history, warranty included, ready for long hauls.'
         },
         {
             id: 't2',
             name: 'Kenworth T680',
             image: 'image/truck2.jpg',
             description: '2021 Kenworth T680, 400HP, Manual, 98,000 miles.',
-            details: 'Fuel efficient, comfortable sleeper cab, financing available.',
-            price: 'R1,100,000',
-            year: 2021,
-            model: 'T680',
-            make: 'Kenworth'
+            details: 'Fuel efficient, comfortable sleeper cab, financing available.'
         },
         {
             id: 't3',
             name: 'Volvo VNL 760',
             image: 'image/truck3.jpg',
             description: '2020 Volvo VNL 760, 425HP, Automatic, 150,000 miles.',
-            details: 'Advanced safety features, spacious interior, one owner.',
-            price: 'R1,050,000',
-            year: 2020,
-            model: 'VNL 760',
-            make: 'Volvo'
+            details: 'Advanced safety features, spacious interior, one owner.'
         }
     ],
     trailers: [
@@ -154,33 +214,21 @@ const products = {
             name: 'Utility 53ft Dry Van',
             image: 'image/trailer1.jpg',
             description: '2022 Utility 53ft Dry Van, swing doors, aluminum roof.',
-            details: 'Lightweight, durable, DOT inspected, ready for work.',
-            price: 'R450,000',
-            year: 2022,
-            model: '53ft Dry Van',
-            make: 'Utility'
+            details: 'Lightweight, durable, DOT inspected, ready for work.'
         },
         {
             id: 'tr2',
             name: 'Fontaine Flatbed',
             image: 'image/trailer2.jpg',
             description: '2021 Fontaine Flatbed, 48ft, steel frame.',
-            details: 'Versatile, easy loading, excellent condition.',
-            price: 'R390,000',
-            year: 2021,
-            model: 'Flatbed',
-            make: 'Fontaine'
+            details: 'Versatile, easy loading, excellent condition.'
         },
         {
             id: 'tr3',
             name: 'Great Dane Reefer',
             image: 'image/trailer3.jpg',
             description: '2020 Great Dane Reefer, 53ft, Thermo King unit.',
-            details: 'Temperature controlled, low hours, perfect for perishables.',
-            price: 'R520,000',
-            year: 2020,
-            model: 'Reefer',
-            make: 'Great Dane'
+            details: 'Temperature controlled, low hours, perfect for perishables.'
         }
     ]
 };
@@ -198,18 +246,11 @@ function renderGallery(category) {
     gallery.innerHTML = '';
     products[category].forEach((product, i) => {
         const card = document.createElement('div');
-        card.className = 'product-card scroll-reveal';
-        card.style.transitionDelay = (i * 0.12) + 's';
+        card.className = `product-card scroll-reveal delay-${(i % 4) + 1}`;
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.description}</p>
-            <div class="product-details">
-                <span><strong>Price:</strong> ${product.price}</span><br>
-                <span><strong>Year:</strong> ${product.year}</span><br>
-                <span><strong>Model:</strong> ${product.model}</span><br>
-                <span><strong>Make:</strong> ${product.make}</span>
-            </div>
             <button class="view-btn" data-id="${product.id}" data-category="${category}">View Details</button>
         `;
         gallery.appendChild(card);
@@ -222,12 +263,6 @@ function showModal(product, category) {
         <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
-        <div class="product-details-modal">
-            <span><strong>Price:</strong> ${product.price}</span><br>
-            <span><strong>Year:</strong> ${product.year}</span><br>
-            <span><strong>Model:</strong> ${product.model}</span><br>
-            <span><strong>Make:</strong> ${product.make}</span><br>
-        </div>
         <p><strong>Details:</strong> ${product.details}</p>
     `;
     // More like this
@@ -237,8 +272,7 @@ function showModal(product, category) {
         const list = moreLikeThis.querySelector('.more-like-list');
         more.forEach((p, i) => {
             const card = document.createElement('div');
-            card.className = 'more-like-card scroll-reveal';
-            card.style.transitionDelay = (i * 0.12) + 's';
+            card.className = `more-like-card scroll-reveal delay-${(i % 4) + 1}`;
             card.innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100px;height:60px;border-radius:6px;"><div>${p.name}</div>`;
             card.onclick = () => showModal(p, category);
             list.appendChild(card);
@@ -249,6 +283,13 @@ function showModal(product, category) {
     modal.classList.remove('hidden');
     setTimeout(revealOnScroll, 100); // Animate modal items
 }
+// Apply scroll reveal to major sections on page load
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.about-section, .faqs-section, .reviews-section, .contact-section, .image-gallery-section').forEach((section, i) => {
+        section.classList.add('scroll-reveal', `delay-${(i % 4) + 1}`);
+    });
+    revealOnScroll();
+});
 // Scroll reveal logic
 function revealOnScroll() {
     const reveals = document.querySelectorAll('.scroll-reveal');
@@ -293,10 +334,8 @@ modal.onclick = function(e) {
     if (e.target === modal) modal.classList.add('hidden');
 };
 
-// Initial render after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    renderGallery(currentCategory);
-});
+// Initial render
+renderGallery(currentCategory);
 
 // Contact form (demo only)
 document.getElementById('contact-form').onsubmit = function(e) {
