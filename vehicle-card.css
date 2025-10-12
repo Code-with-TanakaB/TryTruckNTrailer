@@ -1,0 +1,165 @@
+/* Modern Vehicle Card Design */
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.gallery-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-item-image img {
+    transform: scale(1.08);
+}
+
+.gallery-item-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff9800;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 3px 8px rgba(255, 152, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gallery-item-favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item-favorite:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.gallery-item-favorite i {
+    color: #ff3a5e;
+    font-size: 1.1rem;
+}
+
+.gallery-item-content {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.gallery-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.gallery-item-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a2930;
+    line-height: 1.4;
+}
+
+.gallery-item-subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.gallery-item-features {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding-top: 0.8rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.gallery-item-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.gallery-item-feature i {
+    color: #ff9800;
+    font-size: 1rem;
+}
+
+.gallery-item-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.gallery-item-price {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #ff9800;
+}
+
+.gallery-item-price span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #888;
+}
+
+.gallery-item-button {
+    padding: 0.6rem 1.2rem;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.gallery-item-button:hover {
+    background: #e67c00;
+    transform: translateY(-2px);
+}

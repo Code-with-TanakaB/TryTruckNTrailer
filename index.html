@@ -11,10 +11,14 @@
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo"><i class="fa-solid fa-truck-moving" style="color: red; margin-right: 7px;"></i> Try<span style="color: red;">Truck</span>N<span style="color: red;">Trailer</span></div>
+            <div class="logo">
+    <i class="fa-solid fa-truck-moving truck-icon" style="color: red; margin-right: 7px;"></i> 
+    Try<span style="color: red;">Truck</span>N<span style="color: red;">Trailer</span>
+</div>
             <form class="nav-search" onsubmit="return false;">
                 <input type="text" id="nav-search-input" placeholder="Search products..." autocomplete="off">
                 <button type="submit"><i class="fa fa-search"></i></button>
+                <div id="nav-search-suggestions" class="search-suggestions"></div>
             </form>
             <button class="menu-toggle" aria-label="Open menu">
                 <span class="bar"></span>
@@ -36,45 +40,202 @@
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <div>
                 <form class="nav-search mobile-search" onsubmit="return false;">
                     <input type="text" id="mobile-search-input" placeholder="Search products..." autocomplete="off">
                     <button type="submit"><i class="fa fa-search"></i></button>
+                    <div id="mobile-search-suggestions" class="search-suggestions"></div>
                 </form>
+                </div>
             </div>
         </nav>
-    <section class="hero hero-bg">
-            <h1>Quality Pre-Owned Trucks & Trailers</h1>
-            <p>Find the perfect vehicle for your business needs at competitive prices</p>
-            <a href="#gallery" class="cta-btn">Get Quote</a>
+    <section class="hero">
+            <div class="hero-slider">
+                <div class="hero-slide active" id="slide-1">
+                    <div class="hero-bg" style="background-image: linear-gradient(rgba(26,41,48,0.65), rgba(26,41,48,0.65)), url('image/truck1.jpg');">
+                        <div class="hero-content">
+                            <h2 class="promo-tag">Fall Special Offer</h2>
+                            <h1 class="hero-title">Quality Pre-Owned Trucks & Trailers</h1>
+                            <p class="hero-subtitle">Find the perfect vehicle for your business needs at competitive prices</p>
+                            <div class="hero-buttons">
+                                <a href="#gallery" class="cta-btn primary">View Inventory</a>
+                                <a href="#contact" class="cta-btn secondary">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide" id="slide-2">
+                    <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('image/trailer1.jpg');">
+                        <div class="hero-content">
+                            <h2 class="promo-tag">Limited Time Financing</h2>
+                            <h1 class="hero-title">0% Financing for 24 Months</h1>
+                            <p class="hero-subtitle">Special financing options available on select trailers</p>
+                            <div class="hero-buttons">
+                                <a href="#gallery" class="cta-btn primary">See Eligible Models</a>
+                                <a href="#faqs" class="cta-btn secondary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide" id="slide-3">
+                    <div class="hero-bg" style="background-image: linear-gradient(rgba(26,41,48,0.6), rgba(26,41,48,0.6)), url('image/truck2.jpg');">
+                        <div class="hero-content">
+                            <h2 class="promo-tag">New Arrivals</h2>
+                            <h1 class="hero-title">Premium Fleet Vehicles Just In</h1>
+                            <p class="hero-subtitle">Low mileage trucks and trailers with complete service history</p>
+                            <div class="hero-buttons">
+                                <a href="#gallery" class="cta-btn primary">Explore New Arrivals</a>
+                                <a href="#contact" class="cta-btn secondary">Request Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-controls">
+                <button class="hero-arrow prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+                <div class="hero-dots">
+                    <span class="hero-dot active" data-slide="1"></span>
+                    <span class="hero-dot" data-slide="2"></span>
+                    <span class="hero-dot" data-slide="3"></span>
+                </div>
+                <button class="hero-arrow next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+            </div>
         </section>
     </header>
 
     <main>
         
         <section id="gallery" class="gallery-section">
-            <h2>Our Collection</h2>
-            <div class="category-tabs">
-                <button class="tab-btn active" data-category="trucks">Trucks</button>
-                <button class="tab-btn" data-category="trailers">Trailers</button>
+            <div class="section-header">
+                <h2>Our Collection</h2>
+                <p class="section-subtitle">Explore our premium selection of commercial vehicles</p>
             </div>
-            <div class="gallery-grid" id="product-gallery">
-                <!-- Products will be rendered here by script.js -->
+            
+            <div class="collection-container">
+                <div class="collection-sidebar">
+                    <div class="collection-search">
+                        <div class="search-box">
+                            <input type="text" id="collection-search-input" placeholder="Search inventory..." aria-label="Search inventory">
+                            <button class="search-btn" aria-label="Search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="collection-filters">
+                        <h3>Categories</h3>
+                        <div class="category-tabs vertical">
+                            <button class="tab-btn active" data-category="trucks">
+                                <i class="fa fa-truck"></i> Trucks
+                                <span class="item-count">3</span>
+                            </button>
+                            <button class="tab-btn" data-category="trailers">
+                                <i class="fa fa-trailer"></i> Trailers
+                                <span class="item-count">3</span>
+                            </button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h3>Popular Filters</h3>
+                            <div class="filter-options">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="condition" value="excellent">
+                                    <span class="checkmark"></span>
+                                    <span>Excellent Condition</span>
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="feature" value="low-miles">
+                                    <span class="checkmark"></span>
+                                    <span>Low Mileage</span>
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="feature" value="warranty">
+                                    <span class="checkmark"></span>
+                                    <span>Warranty Available</span>
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="feature" value="financing">
+                                    <span class="checkmark"></span>
+                                    <span>Financing Available</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="collection-content">
+                    <div class="collection-header">
+                        <div class="results-info">
+                            <span class="results-count">Showing <span id="items-count">6</span> vehicles</span>
+                        </div>
+                        <div class="sorting-options">
+                            <label for="collection-sort">Sort By:</label>
+                            <select id="collection-sort">
+                                <option value="featured">Featured</option>
+                                <option value="newest">Newest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-grid" id="product-gallery">
+                        <!-- Products will be rendered here by script.js -->
+                    </div>
+                    
+                    <div class="collection-pagination">
+                        <button class="page-btn" disabled><i class="fa fa-angle-left"></i></button>
+                        <span class="page-indicator">
+                            <span class="current-page">1</span> / <span class="total-pages">1</span>
+                        </span>
+                        <button class="page-btn" disabled><i class="fa fa-angle-right"></i></button>
+                    </div>
+                </div>
             </div>
         </section>
         <section id="image-gallery" class="image-gallery-section">
             <h2>Our Inventory</h2>
-            <div class="slideshow-container">
-                <button class="slideshow-btn prev" aria-label="Previous">&#10094;</button>
-                <div class="slideshow-images">
-                    <!-- Images will be rendered by script.js -->
+            <div class="inventory-filters">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="truck">Trucks</button>
+                        <button class="filter-btn" data-filter="trailer">Trailers</button>
+                    </div>
                 </div>
-                <div class="slideshow-caption">
-                    <!-- Caption will be rendered by script.js -->
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select id="inventory-sort" class="inventory-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
                 </div>
-                <button class="slideshow-btn next" aria-label="Next">&#10095;</button>
             </div>
-            <div class="slideshow-dots">
-                <!-- Dots will be rendered by script.js -->
+            
+            <div class="inventory-grid" id="inventory-grid">
+                <!-- Inventory items will be populated by JavaScript -->
+            </div>
+            
+            <div class="inventory-pagination">
+                <button class="load-more-btn" id="load-more">Load More <i class="fa fa-angle-down"></i></button>
+            </div>
+            
+            <!-- Mobile inventory slider for touch devices -->
+            <div class="mobile-inventory-slider">
+                <div class="inventory-swiper" id="mobile-inventory-swiper">
+                    <!-- Mobile inventory items will be populated by JavaScript -->
+                </div>
+                <div class="swiper-pagination" id="mobile-swiper-pagination"></div>
+            </div>
+            
+            <!-- Featured item -->
+            <div class="featured-inventory">
+                <h3>Featured Vehicle</h3>
+                <div class="featured-card" id="featured-vehicle">
+                    <!-- Featured vehicle will be populated by JavaScript -->
+                </div>
             </div>
         </section>
 
@@ -107,25 +268,108 @@
         </section>
 
         <section id="faqs" class="faqs-section">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question">What types of trucks and trailers do you offer?<span class="arrow">&#9662;</span></button>
-                    <div class="faq-answer">
-                        <p>We offer a variety of trucks including semi-trucks, pickup trucks, and box trucks, as well as flatbed, enclosed, and specialty trailers.</p>
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find answers to common questions about our trucks, trailers, and services</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-categories">
+                    <button class="faq-category-btn active" data-category="all">All Questions</button>
+                    <button class="faq-category-btn" data-category="purchase">Purchasing</button>
+                    <button class="faq-category-btn" data-category="finance">Financing</button>
+                    <button class="faq-category-btn" data-category="service">Services</button>
+                </div>
+                
+                <div class="faq-list">
+                    <div class="faq-item" data-category="purchase">
+                        <button class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon"><i class="fa fa-truck"></i></div>
+                                <span>What types of trucks and trailers do you offer?</span>
+                            </div>
+                            <div class="faq-arrow"><i class="fa fa-chevron-down"></i></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We offer a comprehensive range of commercial vehicles including:</p>
+                            <ul class="faq-bullet-list">
+                                <li><strong>Trucks:</strong> Semi-trucks, pickup trucks, box trucks, and specialty vehicles</li>
+                                <li><strong>Trailers:</strong> Flatbed, enclosed, refrigerated, and specialty trailers</li>
+                                <li><strong>Brands:</strong> Freightliner, Kenworth, Volvo, Great Dane, Utility, and more</li>
+                            </ul>
+                            <p>Our inventory changes regularly, so contact us if you're looking for something specific.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="finance">
+                        <button class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon"><i class="fa fa-credit-card"></i></div>
+                                <span>Do you provide financing options?</span>
+                            </div>
+                            <div class="faq-arrow"><i class="fa fa-chevron-down"></i></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, we offer flexible financing options to help you get the vehicle you need. Our financing benefits include:</p>
+                            <ul class="faq-bullet-list">
+                                <li>Competitive interest rates</li>
+                                <li>Flexible terms from 24-72 months</li>
+                                <li>Options for various credit situations</li>
+                                <li>Quick approval process</li>
+                            </ul>
+                            <p>Contact our finance department to discuss the best options for your business.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="service">
+                        <button class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon"><i class="fa fa-clipboard-check"></i></div>
+                                <span>Can I schedule a test drive?</span>
+                            </div>
+                            <div class="faq-arrow"><i class="fa fa-chevron-down"></i></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely! We encourage test drives so you can ensure the vehicle meets your needs. You can schedule a test drive by:</p>
+                            <ul class="faq-bullet-list">
+                                <li>Calling us at (555) 123-4567</li>
+                                <li>Using our contact form</li>
+                                <li>Visiting our location during business hours</li>
+                            </ul>
+                            <p>We recommend scheduling in advance to ensure the vehicle is ready when you arrive.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="purchase">
+                        <button class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon"><i class="fa fa-shield-check"></i></div>
+                                <span>Do your vehicles come with a warranty?</span>
+                            </div>
+                            <div class="faq-arrow"><i class="fa fa-chevron-down"></i></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Many of our vehicles come with remaining manufacturer warranties or extended warranty options. We also offer additional protection plans for added peace of mind.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="service">
+                        <button class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-icon"><i class="fa fa-shipping-fast"></i></div>
+                                <span>Do you offer delivery services?</span>
+                            </div>
+                            <div class="faq-arrow"><i class="fa fa-chevron-down"></i></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, we offer nationwide delivery services. Delivery fees vary based on distance, and we can provide a quote before finalizing your purchase.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question">Do you provide financing options?<span class="arrow">&#9662;</span></button>
-                    <div class="faq-answer">
-                        <p>Yes, we offer flexible financing options to help you get the vehicle you need.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Can I schedule a test drive?<span class="arrow">&#9662;</span></button>
-                    <div class="faq-answer">
-                        <p>Absolutely! Contact us to schedule a test drive for any vehicle in our collection.</p>
-                    </div>
+                
+                <div class="faq-more">
+                    <p>Don't see your question? We're here to help!</p>
+                    <a href="#contact" class="faq-contact-btn">Contact Us <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -145,28 +389,113 @@
         </section>
 
         <section id="contact" class="contact-section">
-            <h2>Contact Us</h2>
-            <form id="contact-form" class="modern-contact-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name"><i class="fa fa-user"></i> Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p class="section-subtitle">Reach out to us with any questions or to schedule a viewing</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form-container">
+                    <form id="contact-form" class="modern-contact-form">
+                        <div class="form-row">
+                            <div class="form-group floating-label">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Your Name</label>
+                                <div class="input-icon"><i class="fa fa-user"></i></div>
+                            </div>
+                            <div class="form-group floating-label">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address</label>
+                                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group floating-label">
+                                <input type="tel" id="phone" name="phone">
+                                <label for="phone">Phone Number</label>
+                                <div class="input-icon"><i class="fa fa-phone"></i></div>
+                            </div>
+                            <div class="form-group floating-label">
+                                <select id="inquiry-type" name="inquiry-type" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="truck">Truck Inquiry</option>
+                                    <option value="trailer">Trailer Inquiry</option>
+                                    <option value="finance">Financing Question</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label for="inquiry-type">Inquiry Type</label>
+                                <div class="input-icon"><i class="fa fa-question-circle"></i></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group floating-label">
+                            <textarea id="message" name="message" required rows="4"></textarea>
+                            <label for="message">Your Message</label>
+                            <div class="input-icon"><i class="fa fa-comment"></i></div>
+                        </div>
+                        
+                        <div class="form-action">
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                            <div class="form-note">We'll respond within 24 business hours</div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="contact-info-container">
+                    <div class="contact-info-card">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-info-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>123 N11 Road<br>Mokopane, Limpopo</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fa fa-phone-alt"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+27 63-961-7391</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fa fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@trytruckntrailer.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fa fa-clock"></i>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Monday-Friday: 8am - 6pm<br>Saturday: 9am - 4pm<br>Sunday: Closed</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    
+                    <div class="contact-map">
+                        <div class="map-placeholder">
+                            <img src="image/map-placeholder.jpg" alt="Map Location" class="map-image">
+                            <div class="map-overlay">
+                                <a href="https://maps.google.com" target="_blank" class="map-link">
+                                    <i class="fa fa-map"></i> Open in Google Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="message"><i class="fa fa-comment"></i> Message</label>
-                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="contact-btn"><i class="fa fa-paper-plane"></i> Send Message</button>
-            </form>
-            <div class="contact-info modern-contact-info">
-                <div class="info-item"><i class="fa fa-envelope"></i> info@trytruckntrailer.com</div>
-                <div class="info-item"><i class="fa fa-phone"></i> (555) 123-4567</div>
-                <div class="info-item"><i class="fa fa-map-marker-alt"></i> 123 Truck Lane, Trailer City</div>
             </div>
         </section>
     </main>
