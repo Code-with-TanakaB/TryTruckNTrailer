@@ -1,2 +1,2 @@
 # TryTruckNTrailer
-An E-commerce Website with a responsive design and interactive UI for TryTruckNTrailer Company.
+Commercial web platform and product catalog built for TryTruckNTrailer, featuring responsive vehicle/trailer listings and client inquiry flows.
